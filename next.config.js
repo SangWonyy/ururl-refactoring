@@ -1,28 +1,19 @@
-const { withSentryConfig } = require("@sentry/nextjs");
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
-const moduleExports = {
-  images: {
-    loader: "akamai",
-    path: "",
-  },
-  trailingSlash: false,
-  async headers() {
-    return [
-      {
-        source: "/robots.txt",
-        headers: [
-          {
-            key: "Content-Type",
-            value: "text/plain",
-          },
-        ],
-      },
-    ];
-  },
+module.exports = (phase, { defaultConfig }) => {
+  const config = {
+    reactStrictMode: true,
+    swcMinify: true,
+  };
+  // dev
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      ...config,
+    };
+  }
+
+  // prod
+  return {
+    ...config,
+  };
 };
-
-const sentryWebpackPluginOptions = {
-  silent: true,
-};
-
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
