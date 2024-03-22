@@ -5,7 +5,14 @@ import {
   PlusButton,
   InputWrppaer,
 } from "./customHashTag.style";
-import { Dispatch, RefObject, SetStateAction, useCallback, useRef, useState } from "react";
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import { tagType } from "@src/type/login/loginType";
 import { hashTagType } from "@src/type/tag/tagType";
 import { observer } from "mobx-react";
@@ -36,21 +43,25 @@ const CustomHashTag = function CustomHashTag(props: {
   }, 500);
 
   const tagInputCallback = useCallback(
-    (addTag, nameMaxLength, setNameMaxLength) => {
+    (
+      addTag: string,
+      nameMaxLength: boolean,
+      setNameMaxLength: Dispatch<SetStateAction<boolean>>
+    ) => {
       debounceTag(addTag);
       inputEvent(addTag, nameMaxLength, setNameMaxLength);
     },
-    [tagKeyWord],
+    [tagKeyWord]
   );
 
   const keyEnterCallback = useCallback(
-    (event) => {
+    (event: { key: string }) => {
       if (event.key !== "Enter" || !inputRef.current) return;
       if (!checkValidation(inputRef, tagList)) return;
 
       mutationTag(inputRef, addTagMutation, setTagKeyWord);
     },
-    [tagList],
+    [tagList]
   );
 
   const { data: recommandList } = useGetRecommendTagQuery(tagKeyWord);
@@ -121,7 +132,10 @@ const CustomHashTag = function CustomHashTag(props: {
   );
 };
 
-const checkValidation = (inputRef: RefObject<HTMLInputElement>, tagList: hashTagType[]): boolean => {
+const checkValidation = (
+  inputRef: RefObject<HTMLInputElement>,
+  tagList: hashTagType[]
+): boolean => {
   try {
     let isFitCondition = true;
     const addTag = inputRef.current!.value;
@@ -180,7 +194,7 @@ const checkValidation = (inputRef: RefObject<HTMLInputElement>, tagList: hashTag
 const mutationTag = (
   inputRef: RefObject<HTMLInputElement>,
   addTagMutation: UseMutationResult<AddCustomTagType, Error, tagParam, unknown>,
-  setTagKeyWord: Dispatch<SetStateAction<string>>,
+  setTagKeyWord: Dispatch<SetStateAction<string>>
 ) => {
   try {
     const tagValue = inputRef.current!.value;
@@ -212,7 +226,7 @@ const tagMaxLength = (tagList: hashTagType[]) => {
 const inputEvent = (
   addTag: string,
   nameMaxLength: boolean,
-  setNameMaxLength: Dispatch<SetStateAction<boolean>>,
+  setNameMaxLength: Dispatch<SetStateAction<boolean>>
 ) => {
   try {
     // const tagByte = new Blob([addTag]).size;

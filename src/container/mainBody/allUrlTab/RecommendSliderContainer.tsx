@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { SetStateAction, useCallback, useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings } from "react-slick";
@@ -25,20 +25,23 @@ const RecommendSliderContainer = (): JSX.Element => {
     isNext ? sliderCurrent.slickNext() : sliderCurrent.slickPrev();
   };
 
-  const handleBeforeChange = useCallback((current, next) => {
-    setCurrentPage(next);
-    setDragging(true);
-  }, []);
+  const handleBeforeChange = useCallback(
+    (current: any, next: SetStateAction<number>) => {
+      setCurrentPage(next);
+      setDragging(true);
+    },
+    []
+  );
 
   const handleAfterChange = useCallback(() => {
     setDragging(false);
   }, []);
 
   const handleOnItemClick = useCallback(
-    (e) => {
+    (e: { stopPropagation: () => any }) => {
       dragging && e.stopPropagation();
     },
-    [dragging],
+    [dragging]
   );
 
   const settings: Settings = {
@@ -69,17 +72,17 @@ const RecommendSliderContainer = (): JSX.Element => {
         src={`./common/selectArrowRight.svg`}
         onClick={() => sliderHandler(true)}
       />
-      <Slider
-        beforeChange={handleBeforeChange}
-        afterChange={handleAfterChange}
-        {...settings}
-        ref={sliderRef}
-        dotsClass={"slick-dots slick-dots-style slick-dots-style-recommend-url"}
-      >
-        <RecommendUrls type="love" handleOnItemClick={handleOnItemClick} />
-        <RecommendUrls type="new" handleOnItemClick={handleOnItemClick} />
-        {unreadSubscriptions.length !== 0 && <RemindUrls handleOnItemClick={handleOnItemClick} />}
-      </Slider>
+      {/*<Slider*/}
+      {/*  beforeChange={handleBeforeChange}*/}
+      {/*  afterChange={handleAfterChange}*/}
+      {/*  {...settings}*/}
+      {/*  ref={sliderRef}*/}
+      {/*  dotsClass={"slick-dots slick-dots-style slick-dots-style-recommend-url"}*/}
+      {/*>*/}
+      {/*  <RecommendUrls type="love" handleOnItemClick={handleOnItemClick} />*/}
+      {/*  <RecommendUrls type="new" handleOnItemClick={handleOnItemClick} />*/}
+      {/*  {unreadSubscriptions.length !== 0 && <RemindUrls handleOnItemClick={handleOnItemClick} />}*/}
+      {/*</Slider>*/}
     </AllUrlSliderWrapper>
   );
 };

@@ -49,14 +49,6 @@ export const WelcomeImg = styled.img`
   height: 45%;
 `;
 
-export const KakaologinButton = styled(KaKaoLogin)`
-  width: 100% !important;
-  background-color: #fbe950 !important;
-  border-radius: 10px !important;
-  cursor: pointer;
-  outline: none;
-`;
-
 export const KakaoText = styled.div`
   font-size: 15px;
 `;
@@ -132,7 +124,11 @@ export const GuideImageWrapper = styled.div`
   justify-content: center;
 `;
 
-export const GuideImage = styled.div<{ url: string; width: number; height: number }>`
+export const GuideImage = styled.div<{
+  url: string;
+  width: number;
+  height: number;
+}>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
   border-radius: 16px;

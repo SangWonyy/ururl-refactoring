@@ -28,10 +28,10 @@ const UrUrlBanner = function UrUrlBanner(): JSX.Element {
 
   return (
     <BoxWrapper flex={2} style={{ width: "30%" }}>
-      <Slider {...settings} ref={sliderRef}>
-        <ExtensionBanner />
-        <KakaoBanner />
-      </Slider>
+      {/*<Slider {...settings} ref={sliderRef}>*/}
+      {/*  <ExtensionBanner />*/}
+      {/*  <KakaoBanner />*/}
+      {/*</Slider>*/}
     </BoxWrapper>
   );
 };
