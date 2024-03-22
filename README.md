@@ -15,10 +15,14 @@
 
 swc를 통한 빌드를 했을 때 시간을 비교해봤을 때 
 평균 19 ~ 20초 정도 걸리고
+
 <img width="190" alt="스크린샷 2024-03-22 오후 5 21 51" src="https://github.com/SangWonyy/ururl-refactoring/assets/47518178/6dc0a101-fe93-493c-9dae-912489e28ba9">
 
 babel preset을 통해서 빌드했을 때는 약 27초 정도가 걸리는 것을 확인할 수 있다.
-   <img width="172" alt="스크린샷 2024-03-22 오후 5 20 19" src="https://github.com/SangWonyy/ururl-refactoring/assets/47518178/7adb66ab-930d-41e8-86dd-288572810c72">
+
+<img width="172" alt="스크린샷 2024-03-22 오후 5 20 19" src="https://github.com/SangWonyy/ururl-refactoring/assets/47518178/7adb66ab-930d-41e8-86dd-288572810c72">
+
+
 
 4. Mockoon 적용
 서버를 따로 두지는 않을거기 때문에 MOCK API를 통해 작업할 예정이다.
