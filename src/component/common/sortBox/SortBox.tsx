@@ -1,7 +1,14 @@
 import { GtagCategory, OrderType } from "@src/enum/appEnum";
 import { observer } from "mobx-react";
 import { SortBoxWrapper, TextWrapper, CheckIcon } from "./sortBox.style";
-import { Dispatch, RefObject, SetStateAction, useCallback, useEffect, useRef } from "react";
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import OrderStore from "@src/store/main/body/OrderStore";
 import { ClickGtagEvent } from "../../../../lib/gtag";
 const sortKindList = [
@@ -9,23 +16,29 @@ const sortKindList = [
   { id: 2, title: "많이 읽은 순", type: OrderType.MostRead },
 ];
 
-const SortBox = function SortBox(props: { setIsOpen: Dispatch<SetStateAction<boolean>> }): JSX.Element {
+const SortBox = function SortBox(props: {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}): JSX.Element {
   const { orderType } = OrderStore;
   const { setIsOpen } = props;
   const sortRef = useRef<HTMLDivElement>(null);
 
   const clickOutsideCallback = useCallback(
-    (event) => {
+    (event: MouseEvent) => {
       handleClickOutside(event, sortRef, setIsOpen);
     },
-    [sortRef],
+    [sortRef]
   );
 
   useEffect(() => {
-    document.addEventListener("mousedown", (event) => clickOutsideCallback(event));
+    document.addEventListener("mousedown", (event) =>
+      clickOutsideCallback(event)
+    );
 
     return () => {
-      document.removeEventListener("mousedown", (event) => clickOutsideCallback(event));
+      document.removeEventListener("mousedown", (event) =>
+        clickOutsideCallback(event)
+      );
     };
   }, [sortRef]);
 
@@ -68,7 +81,7 @@ const SortBox = function SortBox(props: { setIsOpen: Dispatch<SetStateAction<boo
 const handleClickOutside = (
   e: MouseEvent,
   sortRef: RefObject<HTMLDivElement>,
-  setIsOpen: Dispatch<SetStateAction<boolean>>,
+  setIsOpen: Dispatch<SetStateAction<boolean>>
 ): void => {
   if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
     setIsOpen(false);

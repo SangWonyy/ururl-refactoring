@@ -10,10 +10,10 @@ const SearchBar = function SearchBar(): JSX.Element {
   const router = useRouter();
 
   const keyPressCallback = useCallback(
-    (event) => {
+    (event: any) => {
       handleKeyPress(event, router, searchRef);
     },
-    [searchRef],
+    [searchRef]
   );
 
   return (
@@ -40,13 +40,21 @@ const SearchBar = function SearchBar(): JSX.Element {
   );
 };
 
-const handleKeyPress = (event: any, router: NextRouter, searchRef: RefObject<HTMLInputElement>) => {
+const handleKeyPress = (
+  event: any,
+  router: NextRouter,
+  searchRef: RefObject<HTMLInputElement>
+) => {
   if (event.key !== "Enter" || !searchRef.current) return;
   const searchText = event.target.value;
   search(searchText, router, searchRef);
 };
 
-const search = (searchText: string, router: NextRouter, searchRef: RefObject<HTMLInputElement>) => {
+const search = (
+  searchText: string,
+  router: NextRouter,
+  searchRef: RefObject<HTMLInputElement>
+) => {
   try {
     const currentPath = router.pathname;
     searchRef.current!.value = "";

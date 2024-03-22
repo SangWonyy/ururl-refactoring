@@ -1,5 +1,4 @@
 import { makeAutoObservable, observable } from "mobx";
-import { bold } from "colorette";
 
 type ModalStatusType = {
   isOpen: boolean;

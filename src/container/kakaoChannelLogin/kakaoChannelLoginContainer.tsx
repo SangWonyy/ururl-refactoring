@@ -11,9 +11,13 @@ const NEED_SIGN_UP = "needSignUp";
 const PAIR = "pair";
 const ROOT_MOBILE = "rootMobile";
 
-const loginSuccess = async (props: any, router: NextRouter): Promise<string> => {
+const loginSuccess = async (
+  props: any,
+  router: NextRouter
+): Promise<string> => {
   try {
-    if (!process.env.NEXT_PUBLIC_KAKAO_KEY) throw new Error("카카오키 없습니다.");
+    if (!process.env.NEXT_PUBLIC_KAKAO_KEY)
+      throw new Error("카카오키 없습니다.");
     const currentPath = router.asPath;
     const botToken = currentPath.split("?")[1].split("=")[1];
     if (!botToken) {
@@ -29,7 +33,10 @@ const loginSuccess = async (props: any, router: NextRouter): Promise<string> => 
   }
 };
 
-const postToken = async (kakaoToken: string, botToken: string): Promise<boolean> => {
+const postToken = async (
+  kakaoToken: string,
+  botToken: string
+): Promise<boolean> => {
   try {
     const data = {
       botToken,
@@ -48,7 +55,10 @@ const KakaoChannelLoginContainer = function TabContainer(): JSX.Element {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.navigator !== "undefined"
+    ) {
       setIsMobile(/iPhone|iPod|Android/i.test(navigator.userAgent));
     }
     if (router.asPath.includes("rootMobile")) {
@@ -110,47 +120,11 @@ const KakaoChannelLoginContainer = function TabContainer(): JSX.Element {
         )}
 
         {loginStatus === PAIR &&
-          (kakaoKey ? (
-            <KakaologinButton
-              token={kakaoKey}
-              onSuccess={async (result) => {
-                try {
-                  const signUpRequired = await loginSuccess(result, router);
-                  setLoginStatus(signUpRequired);
-                } catch (e) {
-                  alert(`login fail : ${e}`);
-                }
-              }}
-              onFail={(error) => {
-                console.error(error);
-              }}
-              onLogout={console.info}
-            >
-              <KakaoInner>
-                <KakaoLogo src={"./common/kakaoLogo.svg"} alt={"Image not found"} />
-                카카오 로그인
-              </KakaoInner>
-            </KakaologinButton>
-          ) : (
-            <div>카카오 키가 없어요</div>
-          ))}
+          (kakaoKey ? <></> : <div>카카오 키가 없어요</div>)}
       </InnerWrapper>
     </LoginWrapper>
   );
 };
-
-const KakaologinButton = styled(KaKaoLogin)`
-  background-color: #ffe812 !important;
-  border-radius: 10px !important;
-  cursor: pointer;
-  width: 90% !important;
-  min-width: 100px !important;
-  height: 61px !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 19px !important;
-`;
 
 const UrlCopyButton = styled.div`
   background-color: #979797;

@@ -1,4 +1,10 @@
-import Document, { DocumentContext, Html, Head, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  Html,
+  Head,
+  Main,
+  NextScript,
+} from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { GA_TRACKING_ID } from "../lib/gtag";
 
@@ -10,7 +16,7 @@ class CustomDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+          // enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -37,7 +43,10 @@ class CustomDocument extends Document {
         <Head>
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `
