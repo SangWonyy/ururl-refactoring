@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { TagListWrapper, Tag, LockIcon, CheckIcon } from "./tag.style";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import TagListStore from "@src/store/common/TagListStore";
 import { GtagCategory } from "@src/enum/appEnum";
 import { ClickGtagEvent } from "../../../../../lib/gtag";
@@ -14,7 +14,7 @@ const TagList = function TagList(props: { isArrowUP: boolean }): JSX.Element {
     (tagId: number) => {
       setIdList(sortTagList, tagId);
     },
-    [sortTagList],
+    [sortTagList]
   );
 
   return (
@@ -63,7 +63,9 @@ const TagList = function TagList(props: { isArrowUP: boolean }): JSX.Element {
           tagSetCallback(UNCLASSIFIED);
         }}
       >
-        {sortTagList.includes(UNCLASSIFIED) && <CheckIcon src="common/checkIconThin.svg" />}
+        {sortTagList.includes(UNCLASSIFIED) && (
+          <CheckIcon src="common/checkIconThin.svg" />
+        )}
         미분류
       </Tag>
     </TagListWrapper>
@@ -75,7 +77,9 @@ const setIdList = (sortTagList: number[], selectedNumber: number) => {
     let copyList = [];
     if (sortTagList.includes(selectedNumber)) {
       copyList = [...sortTagList];
-      const selectedIdIndex = sortTagList.findIndex((id) => +id === +selectedNumber);
+      const selectedIdIndex = sortTagList.findIndex(
+        (id) => +id === +selectedNumber
+      );
       copyList.splice(selectedIdIndex, 1);
       TagListStore.setSortTagList(copyList);
     } else {

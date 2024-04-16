@@ -6,7 +6,7 @@ import RecommendUrls from "@src/component/main/allUrlTab/RecommendUrls";
 import RemindUrls from "@src/component/main/allUrlTab/RemindUrls";
 import { AllUrlSliderWrapper, Arrow } from "../mainBody.style";
 import RecommendUrlContentsStore from "@src/store/url/recommendUrlContentsStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const RecommendSliderContainer = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(0);

@@ -10,9 +10,12 @@ import {
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { hashTagType } from "@src/type/tag/tagType";
 import TagList from "./TagList";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import TagListStore from "@src/store/common/TagListStore";
-import { WarningIcon, WarningText } from "@src/component/userInfo/signUp/signUp.style";
+import {
+  WarningIcon,
+  WarningText,
+} from "@src/component/userInfo/signUp/signUp.style";
 import useGetTagListQuery from "@src/queries/tag/useGetTagListQuery";
 
 const HashTag = (): JSX.Element => {
@@ -27,18 +30,22 @@ const HashTag = (): JSX.Element => {
       selectedIdList: number[],
       tagId: number,
       copyList: number[],
-      setIsMaxLength: Dispatch<SetStateAction<boolean>>,
+      setIsMaxLength: Dispatch<SetStateAction<boolean>>
     ) => {
       deleteDuplicate(selectedIdList, tagId, copyList, setIsMaxLength);
     },
-    [],
+    []
   );
 
   const addTagCallback = useCallback(
-    (copyList: number[], tagId: number, setIsMaxLength: Dispatch<SetStateAction<boolean>>) => {
+    (
+      copyList: number[],
+      tagId: number,
+      setIsMaxLength: Dispatch<SetStateAction<boolean>>
+    ) => {
       addTag(copyList, tagId, setIsMaxLength);
     },
-    [],
+    []
   );
 
   tagList.map((tag) => {
@@ -52,7 +59,10 @@ const HashTag = (): JSX.Element => {
           <Label>해시태그를 선택해주세요</Label>
           {isMaxLength && (
             <>
-              <WarningIcon src={"./common/warningIcon.svg"} alt={"Image not found"} />
+              <WarningIcon
+                src={"./common/warningIcon.svg"}
+                alt={"Image not found"}
+              />
               <WarningText>이미 4개의 해시태그를 선택하셨어요!</WarningText>
             </>
           )}
@@ -90,7 +100,7 @@ const deleteDuplicate = (
   selectedIdList: number[],
   tagId: number,
   copyList: number[],
-  setIsMaxLength: Dispatch<SetStateAction<boolean>>,
+  setIsMaxLength: Dispatch<SetStateAction<boolean>>
 ) => {
   try {
     const selectedIdIndex = selectedIdList.findIndex((id) => +id === +tagId);
@@ -101,7 +111,11 @@ const deleteDuplicate = (
   }
 };
 
-const addTag = (copyList: number[], tagId: number, setIsMaxLength: Dispatch<SetStateAction<boolean>>) => {
+const addTag = (
+  copyList: number[],
+  tagId: number,
+  setIsMaxLength: Dispatch<SetStateAction<boolean>>
+) => {
   try {
     const isMaxLength = copyList.length === 4;
 

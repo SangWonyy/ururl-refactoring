@@ -1,5 +1,5 @@
 import { GtagCategory, OrderType } from "@src/enum/appEnum";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { SortBoxWrapper, TextWrapper, CheckIcon } from "./sortBox.style";
 import {
   Dispatch,

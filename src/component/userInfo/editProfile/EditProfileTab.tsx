@@ -22,11 +22,12 @@ import WithDrawalModal from "@src/component/modal/WithDrawalModal/WithDrawalModa
 import styled from "styled-components";
 import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
 import UserInfoStore from "@src/store/user/UserInfoStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const EditProfileTab: React.FC = () => {
   const [checkValidation, setCheckValidation] = useState(false);
-  const [nickNameValidation, setNickNameValidation] = useState<TNickNameState>("prevSameInit");
+  const [nickNameValidation, setNickNameValidation] =
+    useState<TNickNameState>("prevSameInit");
   const [nameMaxLength, setNameMaxLength] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { setProfileUserInfo, profileUserInfo } = ProfileUserInfoStore;
@@ -53,14 +54,20 @@ const EditProfileTab: React.FC = () => {
           <SubTitleText>내가 만드는 해시태그</SubTitleText>
           {nameMaxLength && (
             <>
-              <WarningIcon src={"./common/warningIcon.svg"} alt={"Image not found"} />
+              <WarningIcon
+                src={"./common/warningIcon.svg"}
+                alt={"Image not found"}
+              />
               <WarningText>최대 16글자까지 가능해요</WarningText>
             </>
           )}
         </LabelWrapper>
 
         <TagWrapper>
-          <CustomHashTag setNameMaxLength={setNameMaxLength} nameMaxLength={nameMaxLength} />
+          <CustomHashTag
+            setNameMaxLength={setNameMaxLength}
+            nameMaxLength={nameMaxLength}
+          />
           <CustomTagList />
         </TagWrapper>
       </InfoWrapper>

@@ -1,12 +1,21 @@
 import InputUrl from "./InputUrl";
 import HashTag from "./HashTag";
-import { Wrapper, Label, SaveUrlBodyWrapper, LabelBodyWrapper, WarnningWrapper } from "./urlModalBody.style";
+import {
+  Wrapper,
+  Label,
+  SaveUrlBodyWrapper,
+  LabelBodyWrapper,
+  WarnningWrapper,
+} from "./urlModalBody.style";
 import { useState } from "react";
-import { WarningIcon, WarningText } from "@src/component/userInfo/signUp/signUp.style";
+import {
+  WarningIcon,
+  WarningText,
+} from "@src/component/userInfo/signUp/signUp.style";
 import CustomHashTag from "@src/component/common/customTag/CustomHashTag";
 import { UrlModalEnum } from "@src/enum/appEnum";
 import urlStore from "@src/store/url/urlStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import useGetUrlTitle from "@src/queries/urlInfo/useGetUrlTitle";
 import LoadingInput from "./LoadingInput";
 import UrlTitleInput from "./UrlTitleInput";
@@ -22,7 +31,9 @@ const UrlModalBody = (props: { urlModalType: UrlModalEnum }): JSX.Element => {
   return (
     <SaveUrlBodyWrapper>
       {isSaveUrl && <InputUrl />}
-      {title !== undefined && !isLoading && <UrlTitleInput isSaveUrl={isSaveUrl} />}
+      {title !== undefined && !isLoading && (
+        <UrlTitleInput isSaveUrl={isSaveUrl} />
+      )}
       {isLoading && !isError && <LoadingInput />}
 
       <SeeOnly />
@@ -33,12 +44,18 @@ const UrlModalBody = (props: { urlModalType: UrlModalEnum }): JSX.Element => {
           <Label style={{ marginTop: 0 }}>원하는 해시태그가 없으신가요?</Label>
           {nameMaxLength && (
             <WarnningWrapper>
-              <WarningIcon src={"./common/warningIcon.svg"} alt={"Image not found"} />
+              <WarningIcon
+                src={"./common/warningIcon.svg"}
+                alt={"Image not found"}
+              />
               <WarningText>최대 16글자까지 가능해요</WarningText>
             </WarnningWrapper>
           )}
         </LabelBodyWrapper>
-        <CustomHashTag setNameMaxLength={setNameMaxLength} nameMaxLength={nameMaxLength} />
+        <CustomHashTag
+          setNameMaxLength={setNameMaxLength}
+          nameMaxLength={nameMaxLength}
+        />
       </Wrapper>
     </SaveUrlBodyWrapper>
   );

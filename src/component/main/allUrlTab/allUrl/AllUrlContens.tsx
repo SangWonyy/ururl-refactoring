@@ -1,4 +1,3 @@
-import { observer } from "mobx-react";
 import { Toaster } from "react-hot-toast";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { FetchNextPageOptions, InfiniteQueryObserverResult } from "react-query";
@@ -10,13 +9,14 @@ import AllUrlContentBox from "@src/component/common/contentBox/allurl/AllUrlCont
 import SkeletonLoad from "@src/component/common/loadding/SkeletonLoad";
 import { useState } from "react";
 import useUrlBookmarkControll from "@src/hooks/useUrlBookmarkControll";
+import { observer } from "mobx-react-lite";
 
 const AllUrlContents = (props: {
   allUrlMeta: {
     isLoading: boolean;
     isError: boolean;
     fetchNextPage: (
-      options?: FetchNextPageOptions,
+      options?: FetchNextPageOptions
     ) => Promise<InfiniteQueryObserverResult<TAllUrlTabData, Error>>;
     hasNextPage?: boolean;
   };

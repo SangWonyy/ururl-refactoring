@@ -4,7 +4,7 @@ import UrlModalFooter from "../commonTagComponent/footer/UrlModalFooter";
 import { Modal } from "react-responsive-modal";
 import { UrlWrapper } from "@src/component/modal/commonTagComponent/header/urlModal.style";
 import { UrlModalEnum } from "@src/enum/appEnum";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import UrlStore from "@src/store/url/urlStore";
 import TagListStore from "@src/store/common/TagListStore";
@@ -59,9 +59,15 @@ const SaveUrlModal = (props: {
           event.preventDefault();
         }}
       >
-        <UrlModalHeader setIsOpen={setIsOpen} headerText={"URURL에 저장해둘게요! "} />
+        <UrlModalHeader
+          setIsOpen={setIsOpen}
+          headerText={"URURL에 저장해둘게요! "}
+        />
         <UrlModalBody urlModalType={UrlModalEnum.Save} />
-        <UrlModalFooter urlModalType={UrlModalEnum.Save} setIsOpen={setIsOpen} />
+        <UrlModalFooter
+          urlModalType={UrlModalEnum.Save}
+          setIsOpen={setIsOpen}
+        />
       </UrlWrapper>
     </Modal>
   );

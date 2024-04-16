@@ -4,7 +4,7 @@ import { GtagCategory, InfoType } from "@src/enum/appEnum";
 import { UserInfoType } from "@src/type/user/userType";
 import { isEqual } from "lodash";
 import { TNickNameState } from "@src/type/login/loginType";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import WithDrawalModal from "@src/component/modal/WithDrawalModal/WithDrawalModal";
 import UserInfoStore from "@src/store/user/UserInfoStore";
 import { toJS } from "mobx";
@@ -32,11 +32,22 @@ const CompleteButton = function SignUpButton(props: {
   const signUpUserMutation = useSaveUserInfoMutation(router);
 
   const signupCallback = useCallback(() => {
-    signUp(profileUserInfo, setCheckValidation, nickNameValidation, signUpUserMutation);
+    signUp(
+      profileUserInfo,
+      setCheckValidation,
+      nickNameValidation,
+      signUpUserMutation
+    );
   }, [profileUserInfo, nickNameValidation]);
 
   const editSaveCallback = useCallback(() => {
-    editSave(profileUserInfo, setCheckValidation, nickNameValidation, updateUserInfoMutation, router);
+    editSave(
+      profileUserInfo,
+      setCheckValidation,
+      nickNameValidation,
+      updateUserInfoMutation,
+      router
+    );
   }, [nickNameValidation, profileUserInfo]);
 
   return (
@@ -81,12 +92,23 @@ const signUp = async (
   userInfo: UserInfoType,
   setCheckValidation: Dispatch<SetStateAction<boolean>>,
   nickNameValidation: TNickNameState,
-  signUpUserMutation: UseMutationResult<{ token: string | null }, Error, UserInfoType, unknown>,
+  signUpUserMutation: UseMutationResult<
+    { token: string | null },
+    Error,
+    UserInfoType,
+    unknown
+  >
 ) => {
   try {
-    const validation = checkValidation(userInfo, setCheckValidation, nickNameValidation);
+    const validation = checkValidation(
+      userInfo,
+      setCheckValidation,
+      nickNameValidation
+    );
 
-    validation.validation ? goSignup(userInfo, signUpUserMutation) : failInputInfo(validation.infoKey);
+    validation.validation
+      ? goSignup(userInfo, signUpUserMutation)
+      : failInputInfo(validation.infoKey);
   } catch (e) {
     throw new Error(`signUp : ${e}`);
   }
@@ -106,7 +128,12 @@ const failInputInfo = (failReason: string) => {
 
 const goSignup = (
   userInfo: UserInfoType,
-  signUpUserMutation: UseMutationResult<{ token: string | null }, Error, UserInfoType, unknown>,
+  signUpUserMutation: UseMutationResult<
+    { token: string | null },
+    Error,
+    UserInfoType,
+    unknown
+  >
 ) => {
   try {
     signUpUserMutation.mutate(userInfo);
@@ -120,7 +147,7 @@ const editSave = async (
   setCheckValidation: Dispatch<SetStateAction<boolean>>,
   nickNameValidation: TNickNameState,
   updateUserInfoMutation: UseMutationResult<any, Error, UserInfoType, unknown>,
-  router: NextRouter,
+  router: NextRouter
 ) => {
   try {
     const { userInfo } = UserInfoStore;
@@ -130,7 +157,11 @@ const editSave = async (
     const differentValue = diffValue(newUser, prevUser);
     if (isNotChangeData(differentValue, router)) return;
 
-    const validation = checkValidation(differentValue, setCheckValidation, nickNameValidation);
+    const validation = checkValidation(
+      differentValue,
+      setCheckValidation,
+      nickNameValidation
+    );
     validation.validation
       ? goEditMyInfo(updateUserInfoMutation, differentValue)
       : failInputInfo(validation.infoKey);
@@ -141,7 +172,7 @@ const editSave = async (
 
 const goEditMyInfo = (
   updateUserInfoMutation: UseMutationResult<any, Error, UserInfoType, unknown>,
-  differentValue: any,
+  differentValue: any
 ) => {
   try {
     updateUserInfoMutation.mutate(differentValue);
@@ -188,7 +219,7 @@ const diffValue = (newUserInfo: any, prevUserInfo: any) => {
 const checkValidation = (
   userInfo: any,
   setCheckValidation: Dispatch<SetStateAction<boolean>>,
-  nickNameValidation: TNickNameState,
+  nickNameValidation: TNickNameState
 ): { validation: boolean; infoKey: string } => {
   try {
     let validation = {
@@ -213,7 +244,8 @@ const checkValidation = (
         return false;
       }
 
-      const enableNickname = nickNameValidation === "check" || nickNameValidation === "prevSame";
+      const enableNickname =
+        nickNameValidation === "check" || nickNameValidation === "prevSame";
       if (key === "nickName" && !enableNickname) {
         validation = {
           validation: false,

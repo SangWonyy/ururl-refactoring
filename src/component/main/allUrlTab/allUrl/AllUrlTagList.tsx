@@ -1,12 +1,13 @@
 import { useCallback, useState } from "react";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import TagListStore from "@src/store/common/TagListStore";
 import { AllUrlTag, TagListWrapper } from "../../common/tag/tag.style";
 import { UrUrlColor } from "@styles/urUrlStyle";
 
 const AllUrlTagList = (): JSX.Element => {
   const [all, setAll] = useState<boolean>(true);
-  const { setAllUrlSelectedTagId, allUrlSelectedTagId, allUrlTagList } = TagListStore;
+  const { setAllUrlSelectedTagId, allUrlSelectedTagId, allUrlTagList } =
+    TagListStore;
 
   const tagClickHandler = useCallback((tagId: number) => {
     if (tagId === -1) {
@@ -35,7 +36,11 @@ const AllUrlTagList = (): JSX.Element => {
             }}
           >
             {name}
-            {+id !== -1 && <div style={{ color: UrUrlColor.gray3, marginLeft: 5 }}>{size}</div>}
+            {+id !== -1 && (
+              <div style={{ color: UrUrlColor.gray3, marginLeft: 5 }}>
+                {size}
+              </div>
+            )}
           </AllUrlTag>
         );
       })}

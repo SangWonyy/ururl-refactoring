@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { ThumbnailList } from "@src/enum/appEnum";
 import ThumbnailModal from "@src/component/modal/thumbnailModal/ThumbnailModal";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
 
 const Profile = function Profile(): JSX.Element {
@@ -24,7 +24,10 @@ const Profile = function Profile(): JSX.Element {
           setIsOpen(true);
         }}
       >
-        <ProfileImg src={ThumbnailList[profileUserInfo.defaultPhotoIdx].img} alt={"Image not found"} />
+        <ProfileImg
+          src={ThumbnailList[profileUserInfo.defaultPhotoIdx].img}
+          alt={"Image not found"}
+        />
         <GrayBackground size={60} />
         <SettingIcon src={"./signUp/settingIcon.svg"} alt={"Image not found"} />
       </ThumbnailWrapper>

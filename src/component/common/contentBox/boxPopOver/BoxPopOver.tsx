@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { BoxPopOverWrapper, Content, CloseIcon } from "../contentBox.style";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import toast from "react-hot-toast";
 import ChallengeStore from "@src/store/main/body/ChallengeStore";
 import useReadUrlMutation from "@src/queries/contentBox/useReadUrlMutation";

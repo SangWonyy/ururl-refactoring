@@ -10,7 +10,7 @@ import {
   GoNotion,
 } from "./header.style";
 import { GtagCategory, HeaderTabType, ThumbnailList } from "@src/enum/appEnum";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import UserInfoStore from "@src/store/user/UserInfoStore";
 import ProfileSettingBubble from "@src/component/common/header/ProfileSettingBubble";
@@ -47,7 +47,9 @@ const Header = function Header(): JSX.Element {
   };
 
   useEffect(() => {
-    const image = loggedIn ? ThumbnailList[userInfo.defaultPhotoIdx].img : "./profile/noneProfile.svg";
+    const image = loggedIn
+      ? ThumbnailList[userInfo.defaultPhotoIdx].img
+      : "./profile/noneProfile.svg";
     setIconSrc(image);
   }, [loggedIn, userInfo]);
 
@@ -67,13 +69,19 @@ const Header = function Header(): JSX.Element {
         <RightItems>
           <GoNotion
             onClick={infoClickHandler}
-            href={"https://ururl-official.notion.site/URURL-c317d8e3ef714874ae633c27d8060523"}
+            href={
+              "https://ururl-official.notion.site/URURL-c317d8e3ef714874ae633c27d8060523"
+            }
             target="_blank"
           >
             <RightIcon src={"./header/infoIcon.svg"} alt={"Image not found"} />
           </GoNotion>
           <UserWrapper loggingIn={loginState}>
-            <UserIcon src={iconSrc} alt="Image not found" onClick={profileIconClickHandler} />
+            <UserIcon
+              src={iconSrc}
+              alt="Image not found"
+              onClick={profileIconClickHandler}
+            />
             <ProfileSettingBubble />
           </UserWrapper>
         </RightItems>

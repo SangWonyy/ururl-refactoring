@@ -7,7 +7,7 @@ import Header from "@src/component/common/header/Header";
 import CommentModal from "@src/component/modal/commentModal/CommentModal";
 import FooterContainer from "@src/container/footer/FooterContainer";
 import useDefaultSet from "@src/hooks/useDefaultSet";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import LoginModal from "@src/component/modal/loginModal/LoginModal";
 import ModalStore from "@src/store/common/modalStore";
 import InterviewModal from "@src/component/modal/interviewModal/InterviewModal";

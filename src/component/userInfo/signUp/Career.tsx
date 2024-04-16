@@ -8,7 +8,7 @@ import {
 import styled from "styled-components";
 import { UrUrlColor } from "@styles/urUrlStyle";
 import { Dropdown } from "semantic-ui-react";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
 import { TCarreerLevel } from "@src/type/user/userType";
 

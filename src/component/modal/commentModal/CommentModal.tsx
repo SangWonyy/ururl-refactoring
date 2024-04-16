@@ -11,7 +11,7 @@ import {
   CancelBtn,
 } from "./commentModal.style";
 import ModalStore from "@src/store/common/modalStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const CommentModal = function CommentModal(): JSX.Element {
   const {
@@ -46,7 +46,11 @@ const CommentModal = function CommentModal(): JSX.Element {
           border: "none",
           minWidth: 330,
         },
-        modalContainer: { display: "flex", justifyContent: "center", alignItems: "center" },
+        modalContainer: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        },
       }}
     >
       {closeIcon && (
@@ -58,7 +62,9 @@ const CommentModal = function CommentModal(): JSX.Element {
       <Comment>{text}</Comment>
       {subtext && (
         <SubCommentWrapper>
-          {needInfoIcon && <InfoIcon src={"./common/infoIcon.svg"} alt="no info icon" />}
+          {needInfoIcon && (
+            <InfoIcon src={"./common/infoIcon.svg"} alt="no info icon" />
+          )}
           <SubComment bold={!needInfoIcon}>{subtext}</SubComment>
         </SubCommentWrapper>
       )}

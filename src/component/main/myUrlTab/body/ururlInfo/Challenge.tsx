@@ -1,4 +1,4 @@
-import {BoxWrapper, OverProgress} from "./banner.style";
+import { BoxWrapper, OverProgress } from "./banner.style";
 import {
   ChallengeInner,
   ThisWeekendWrapper,
@@ -9,7 +9,7 @@ import {
   CurrentCnt,
   GoalCnt,
 } from "./banner.style";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ChallengeStore from "@src/store/main/body/ChallengeStore";
 import { useMemo } from "react";
 import SkeletonChallengeLoad from "@src/component/common/loadding/SkeletonChallengeLoad";
@@ -45,8 +45,12 @@ const Challenge = (props: { isLoading: boolean }): JSX.Element => {
   const isOverGoal = weekReadCount > goal;
   const percentage = (weekReadCount * 100) / goal;
   const maxPercentage = 100;
-  const goalPercentage = goal === 0 ? 0 : isAchieveGoal ? maxPercentage : percentage;
-  const goalResult = useMemo<number>(() => getReadCommentResult(goal, weekReadCount), [goal, weekReadCount]);
+  const goalPercentage =
+    goal === 0 ? 0 : isAchieveGoal ? maxPercentage : percentage;
+  const goalResult = useMemo<number>(
+    () => getReadCommentResult(goal, weekReadCount),
+    [goal, weekReadCount]
+  );
 
   return (
     <BoxWrapper flex={3}>
@@ -62,22 +66,18 @@ const Challenge = (props: { isLoading: boolean }): JSX.Element => {
             </CommentsWrapper>
             <CommentsWrapper>
               {commentList[goalResult].infoComment}
-              {goalResult === 1 && (goal - weekReadCount > 0 ? goal - weekReadCount : 0) + "개👏👏👏"}
+              {goalResult === 1 &&
+                (goal - weekReadCount > 0 ? goal - weekReadCount : 0) +
+                  "개👏👏👏"}
               {goalResult === 3 && weekReadCount - goal + "개 더 읽으셨어요🎉"}
             </CommentsWrapper>
             <GaugeWrapper>
               <ProgressWrapper>
-
                 <GoalCnt>{goal} 개</GoalCnt>
                 <Progress percent={goalPercentage}>
                   <CurrentCnt>{weekReadCount} 개</CurrentCnt>
                 </Progress>
-                {
-                    isOverGoal && (
-                        <OverProgress/>
-                    )
-                }
-
+                {isOverGoal && <OverProgress />}
               </ProgressWrapper>
             </GaugeWrapper>
           </>

@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import {
   BoxWrapper,
   BoxImage,
@@ -20,7 +26,7 @@ import ChallengeStore from "@src/store/main/body/ChallengeStore";
 import EditContentBoxModal from "@src/component/modal/editTagModal/EditContentBoxModal";
 import { MyContentType, ReadUrlType } from "@src/type/mainBody/mainBodyType";
 import ContentInfo from "@src/component/common/contentBox/ContentInfo";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { UseMutationResult } from "react-query";
 import useReadUrlMutation from "@src/queries/contentBox/useReadUrlMutation";
 import urlStore from "@src/store/url/urlStore";
@@ -33,7 +39,13 @@ const ContentBox = function ContentBox(props: {
   boxIndex: number;
   handleOnItemClick?: (e: any) => void;
 }): JSX.Element {
-  const { contentBox, selectedIndex, setSelectedIndex, boxIndex, handleOnItemClick } = props;
+  const {
+    contentBox,
+    selectedIndex,
+    setSelectedIndex,
+    boxIndex,
+    handleOnItemClick,
+  } = props;
   const { thumbnail, url, isRead, title, tags, isPublic, id } = contentBox;
   const [read, setRead] = useState<boolean>(isRead);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
@@ -93,7 +105,10 @@ const ContentBox = function ContentBox(props: {
                     setOpenEditModal(true);
                   }}
                 >
-                  <EditIcon src={"./common/editIcon.svg"} alt={"Image not found"} />
+                  <EditIcon
+                    src={"./common/editIcon.svg"}
+                    alt={"Image not found"}
+                  />
                 </EditIconWrapper>
               }
               position={"bottom center"}
@@ -147,10 +162,22 @@ const setChallengeStore = () => {
     const currenTweekReadCount = challengeData.weekReadCount;
     const currenWeekStoreCount = challengeData.weekStoreCount;
 
-    const totalStoreCount = currentTotalStoreCnt > 0 ? currentTotalStoreCnt - 1 : currentTotalStoreCnt;
-    const totalReadCount = currentTotalReadCount > 0 ? currentTotalReadCount - 1 : currentTotalReadCount;
-    const weekReadCount = currenTweekReadCount > 0 ? currenTweekReadCount - 1 : currenTweekReadCount;
-    const weekStoreCount = currenWeekStoreCount > 0 ? currenWeekStoreCount - 1 : currenWeekStoreCount;
+    const totalStoreCount =
+      currentTotalStoreCnt > 0
+        ? currentTotalStoreCnt - 1
+        : currentTotalStoreCnt;
+    const totalReadCount =
+      currentTotalReadCount > 0
+        ? currentTotalReadCount - 1
+        : currentTotalReadCount;
+    const weekReadCount =
+      currenTweekReadCount > 0
+        ? currenTweekReadCount - 1
+        : currenTweekReadCount;
+    const weekStoreCount =
+      currenWeekStoreCount > 0
+        ? currenWeekStoreCount - 1
+        : currenWeekStoreCount;
 
     setChallengeData({
       ...challengeData,
@@ -169,7 +196,12 @@ const goUrl = (
   setRead: Dispatch<SetStateAction<boolean>>,
   urlId: number,
   url: string,
-  readMutation: UseMutationResult<{ variance: number }, Error, ReadUrlType, unknown>,
+  readMutation: UseMutationResult<
+    { variance: number },
+    Error,
+    ReadUrlType,
+    unknown
+  >
 ) => {
   try {
     const { challengeData, setChallengeData } = ChallengeStore;

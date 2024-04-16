@@ -1,4 +1,4 @@
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { Toaster } from "react-hot-toast";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState } from "react";
@@ -21,12 +21,8 @@ const Contents = (): JSX.Element => {
   const { sortTagList } = TagListStore;
   const { orderType } = OrderStore;
 
-  const { fetchNextPage, isFetching, isLoading, isError, hasNextPage } = useMyUrlQuery(
-    1,
-    false,
-    orderType,
-    sortTagList,
-  );
+  const { fetchNextPage, isFetching, isLoading, isError, hasNextPage } =
+    useMyUrlQuery(1, false, orderType, sortTagList);
 
   const listLength = contentBoxList.length;
 

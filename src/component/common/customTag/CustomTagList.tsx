@@ -1,9 +1,15 @@
-import { CustomTag, CustomTagWrapper, DeleteIcon, IconWrapper, LockIcon } from "./customHashTag.style";
+import {
+  CustomTag,
+  CustomTagWrapper,
+  DeleteIcon,
+  IconWrapper,
+  LockIcon,
+} from "./customHashTag.style";
 import { useEffect, useMemo, useState } from "react";
 import { hashTagType } from "@src/type/tag/tagType";
 import TagListStore from "@src/store/common/TagListStore";
 import TagDeleteModal from "@src/component/modal/tagDeleteModal/TagDeleteModal";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const CustomTagList = function (): JSX.Element {
   const { tagList } = TagListStore;

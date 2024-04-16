@@ -1,7 +1,7 @@
 import { LeftItem, LeftItems } from "@src/component/common/header/header.style";
 import { GtagCategory, HeaderTabType } from "@src/enum/appEnum";
 import HeaderStore from "@src/store/main/header/HeaderStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import { ClickGtagEvent } from "../../../../lib/gtag";
 import { useCallback } from "react";
@@ -42,17 +42,26 @@ const UrlTypeTab = (): JSX.Element => {
     return tabType === HeaderTabType.MyUrl ? "myUrl" : "/";
   }, []);
 
-  const getTabType = useCallback((isAll: boolean, loggingIn: string | null | undefined) => {
-    if (isAll) return HeaderTabType.AllUrl;
-    return loggingIn ? HeaderTabType.MyUrl : HeaderTabType.None;
-  }, []);
+  const getTabType = useCallback(
+    (isAll: boolean, loggingIn: string | null | undefined) => {
+      if (isAll) return HeaderTabType.AllUrl;
+      return loggingIn ? HeaderTabType.MyUrl : HeaderTabType.None;
+    },
+    []
+  );
 
   return (
     <LeftItems>
-      <LeftItem isSelected={headerTabType === HeaderTabType.MyUrl} onClick={() => tabClickHandler(false)}>
+      <LeftItem
+        isSelected={headerTabType === HeaderTabType.MyUrl}
+        onClick={() => tabClickHandler(false)}
+      >
         My URL
       </LeftItem>
-      <LeftItem isSelected={headerTabType === HeaderTabType.AllUrl} onClick={() => tabClickHandler(true)}>
+      <LeftItem
+        isSelected={headerTabType === HeaderTabType.AllUrl}
+        onClick={() => tabClickHandler(true)}
+      >
         All URL
       </LeftItem>
     </LeftItems>

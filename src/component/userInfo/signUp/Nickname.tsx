@@ -11,7 +11,7 @@ import {
 } from "./signUp.style";
 import { Dispatch, SetStateAction, useCallback, useRef } from "react";
 import { TNickNameState } from "@src/type/login/loginType";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import UserInfoStore from "@src/store/user/UserInfoStore";
 import { UseMutationResult } from "react-query";
 import useCheckNicknameMutation from "@src/queries/userInfo/useCheckNicknameMutation";
@@ -19,7 +19,7 @@ import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
 
 const checkDuplication = (
   checkMutation: UseMutationResult<boolean, Error, string, unknown>,
-  nickname?: string,
+  nickname?: string
 ) => {
   try {
     if (!nickname) return;
@@ -35,7 +35,12 @@ const Nickname = function NicName(props: {
   nickNameValidation: TNickNameState;
   setNickNameValidation: Dispatch<SetStateAction<TNickNameState>>;
 }): JSX.Element {
-  const { checkValidation, nickNameValidation, setNickNameValidation, setCheckValidation } = props;
+  const {
+    checkValidation,
+    nickNameValidation,
+    setNickNameValidation,
+    setCheckValidation,
+  } = props;
   const inputRef = useRef<HTMLInputElement>(null);
   const { userInfo } = UserInfoStore;
   const { profileUserInfo, setProfileUserInfo } = ProfileUserInfoStore;
@@ -59,19 +64,28 @@ const Nickname = function NicName(props: {
     }
 
     const { color, text } = warnning;
-    return <ResultNicknameValidation fontColor={color}>{text}</ResultNicknameValidation>;
+    return (
+      <ResultNicknameValidation fontColor={color}>
+        {text}
+      </ResultNicknameValidation>
+    );
   }, [nickNameValidation]);
 
   return (
     <InfoWrapper>
       <SubTitleTextWrapper>
         <SubTitleText id="nickName">닉네임</SubTitleText>
-        {checkValidation && (nickNameValidation === "noneCheck" || nickNameValidation === "init") && (
-          <>
-            <WarningIcon src={"./common/warningIcon.svg"} alt={"Image not found"} />
-            <WarningText>중복확인해주세요</WarningText>
-          </>
-        )}
+        {checkValidation &&
+          (nickNameValidation === "noneCheck" ||
+            nickNameValidation === "init") && (
+            <>
+              <WarningIcon
+                src={"./common/warningIcon.svg"}
+                alt={"Image not found"}
+              />
+              <WarningText>중복확인해주세요</WarningText>
+            </>
+          )}
       </SubTitleTextWrapper>
       <InputWrapper>
         <UrUrlInput
@@ -81,7 +95,8 @@ const Nickname = function NicName(props: {
           width={82}
           onChange={(event) => {
             const nickName = event.target.value;
-            const isSamePrev = userInfo.nickName && userInfo.nickName === nickName;
+            const isSamePrev =
+              userInfo.nickName && userInfo.nickName === nickName;
             const validation = isSamePrev ? "prevSame" : "noneCheck";
             setNickNameValidation(validation);
 
@@ -98,7 +113,8 @@ const Nickname = function NicName(props: {
               return;
             }
 
-            const isSamePrev = userInfo.nickName && userInfo.nickName === nickName;
+            const isSamePrev =
+              userInfo.nickName && userInfo.nickName === nickName;
             if (isSamePrev) return;
 
             checkDuplication(checkMutation, nickName);

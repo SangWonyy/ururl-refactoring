@@ -1,6 +1,6 @@
 import { InfoWrapper, Label, ValueWrapper } from "./withdrawalModal.style";
 import UserInfoStore from "../../../store/user/UserInfoStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const Account = function Account(): JSX.Element {
   const { userInfo } = UserInfoStore;

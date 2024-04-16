@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 import { BoxPopOverWrapper, Content, CloseIcon } from "../contentBox.style";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import toast from "react-hot-toast";
 import ModalStore from "@src/store/common/modalStore";
 import { useRouter } from "next/router";

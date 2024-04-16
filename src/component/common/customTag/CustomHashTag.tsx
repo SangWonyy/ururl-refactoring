@@ -15,7 +15,7 @@ import {
 } from "react";
 import { tagType } from "@src/type/login/loginType";
 import { hashTagType } from "@src/type/tag/tagType";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import TagListStore from "@src/store/common/TagListStore";
 import { UseMutationResult } from "react-query";
 import { tagParam } from "@pages/api/tag/addCustomTag";

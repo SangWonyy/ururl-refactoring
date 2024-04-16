@@ -14,10 +14,12 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { hashTagType } from "@src/type/tag/tagType";
 import TagListStore from "@src/store/common/TagListStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
 
-const Interests = function Interests(props: { checkValidation: boolean }): JSX.Element {
+const Interests = function Interests(props: {
+  checkValidation: boolean;
+}): JSX.Element {
   const { checkValidation } = props;
   const { tagList } = TagListStore;
   const { profileUserInfo, setProfileUserInfo } = ProfileUserInfoStore;
@@ -33,10 +35,13 @@ const Interests = function Interests(props: { checkValidation: boolean }): JSX.E
 
         setProfileUserInfo({ ...profileUserInfo, hashtags: copyList });
       } else {
-        setProfileUserInfo({ ...profileUserInfo, hashtags: [...hashtags, tag] });
+        setProfileUserInfo({
+          ...profileUserInfo,
+          hashtags: [...hashtags, tag],
+        });
       }
     },
-    [profileUserInfo],
+    [profileUserInfo]
   );
 
   useEffect(() => {
@@ -50,7 +55,10 @@ const Interests = function Interests(props: { checkValidation: boolean }): JSX.E
         <SubInfoWrapper>
           {checkValidation && profileUserInfo.hashtags.length === 0 ? (
             <InterestWrapper>
-              <WarningIcon src={"./common/warningIcon.svg"} alt={"Image not found"} />
+              <WarningIcon
+                src={"./common/warningIcon.svg"}
+                alt={"Image not found"}
+              />
               <WarningText>요즘 어디에 관심이 많으세요?</WarningText>
             </InterestWrapper>
           ) : (
@@ -63,7 +71,9 @@ const Interests = function Interests(props: { checkValidation: boolean }): JSX.E
       </SubTitleTextWrapper>
       <SignUpTagWrapper>
         {metaTagList.map((tag, index) => {
-          const selectedIndex = selectedTagList.findIndex((selectedTagId) => selectedTagId === +tag.id);
+          const selectedIndex = selectedTagList.findIndex(
+            (selectedTagId) => selectedTagId === +tag.id
+          );
           return (
             <SignUpTag
               key={tag.id}

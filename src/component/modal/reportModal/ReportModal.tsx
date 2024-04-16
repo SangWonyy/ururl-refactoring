@@ -2,7 +2,7 @@ import { Modal } from "react-responsive-modal";
 import React from "react";
 import ReportReason from "@src/component/modal/reportModal/ReportReason";
 import ModalStore from "@src/store/common/modalStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { CloseIcon } from "@src/component/userInfo/signUp/signUp.style";
 
 const ReportModal: React.FC = () => {
@@ -22,11 +22,27 @@ const ReportModal: React.FC = () => {
       }}
       showCloseIcon={false}
       styles={{
-        modalContainer: { display: "flex", justifyContent: "center", alignItems: "center" },
-        modal: { padding: 20, width: 520, height: 366, borderRadius: 13, outline: "none" },
+        modalContainer: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        },
+        modal: {
+          padding: 20,
+          width: 520,
+          height: 366,
+          borderRadius: 13,
+          outline: "none",
+        },
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
         <CloseIcon
           style={{ width: 25, height: 25 }}
           src={"./common/closeIcon.svg"}

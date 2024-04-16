@@ -9,12 +9,13 @@ import {
 import useGetAllUrlQuery from "@src/queries/allUrl/useGetAllUrlQuery";
 import ReportModal from "@src/component/modal/reportModal/ReportModal";
 import TagListStore from "@src/store/common/TagListStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 const AllUrlTabContainer = (): JSX.Element => {
   const { allUrlSelectedTagId } = TagListStore;
 
-  const { fetchNextPage, isLoading, isError, hasNextPage } = useGetAllUrlQuery(allUrlSelectedTagId);
+  const { fetchNextPage, isLoading, isError, hasNextPage } =
+    useGetAllUrlQuery(allUrlSelectedTagId);
 
   return (
     <>

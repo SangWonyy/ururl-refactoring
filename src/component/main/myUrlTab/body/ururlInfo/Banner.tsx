@@ -1,7 +1,7 @@
 import Challenge from "./Challenge";
 import ActiveContents from "./ActiveContents";
 import UrUrlBanner from "./UrUrlBanner";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { BannerWrapper } from "./banner.style";
 import useGetChallengeQuery from "@src/queries/userInfo/useGetChallengeQuery";
 

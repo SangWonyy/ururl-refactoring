@@ -1,6 +1,12 @@
 import { ActiveBoxWrapper } from "./banner.style";
-import { ActiveContentsWrapper, ActiveCnt, ActiveInfoWrapper, Icon, ActiveText } from "./banner.style";
-import { observer } from "mobx-react";
+import {
+  ActiveContentsWrapper,
+  ActiveCnt,
+  ActiveInfoWrapper,
+  Icon,
+  ActiveText,
+} from "./banner.style";
+import { observer } from "mobx-react-lite";
 import ChallengeStore from "@src/store/main/body/ChallengeStore";
 import SkeletonActiveContentsLoad from "@src/component/common/loadding/SkeletonActiveContentsLoad";
 
@@ -35,8 +41,17 @@ const ActiveContents = (props: { isLoading: boolean }): JSX.Element => {
           return (
             <ActiveInfoWrapper key={id}>
               <ActiveCnt isMargin={id === 1}>
-                <Icon src={icon} size={size} isMargin={id === 1} alt={"Image not found"} />
-                {isLoading && count < 0 ? <SkeletonActiveContentsLoad /> : count}
+                <Icon
+                  src={icon}
+                  size={size}
+                  isMargin={id === 1}
+                  alt={"Image not found"}
+                />
+                {isLoading && count < 0 ? (
+                  <SkeletonActiveContentsLoad />
+                ) : (
+                  count
+                )}
               </ActiveCnt>
               <ActiveText>{title}</ActiveText>
             </ActiveInfoWrapper>

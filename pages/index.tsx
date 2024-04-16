@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Seo from "@src/component/common/Seo";
 import AllUrlTabContainer from "@src/container/mainBody/allUrlTab/AllUrlTabContainer";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import SaveUrlButton from "@src/component/common/body/SaveUrlButton";
 import styled from "styled-components";
 

@@ -7,10 +7,12 @@ import {
   WarningText,
 } from "./signUp.style";
 import UserInfoStore from "@src/store/user/UserInfoStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
 
-const OneLineIntroduction = function OneLineIntroduction(props: { checkValidation: boolean }): JSX.Element {
+const OneLineIntroduction = function OneLineIntroduction(props: {
+  checkValidation: boolean;
+}): JSX.Element {
   const { checkValidation } = props;
   const { profileUserInfo, setProfileUserInfo } = ProfileUserInfoStore;
   return (
@@ -19,7 +21,10 @@ const OneLineIntroduction = function OneLineIntroduction(props: { checkValidatio
         <SubTitleText id={"introduction"}>한줄자기소개</SubTitleText>
         {checkValidation && profileUserInfo.introduction === "" && (
           <>
-            <WarningIcon src={"./common/warningIcon.svg"} alt={"Image not found"} />
+            <WarningIcon
+              src={"./common/warningIcon.svg"}
+              alt={"Image not found"}
+            />
             <WarningText>어떤 사람인지 너무 궁금해요!</WarningText>
           </>
         )}

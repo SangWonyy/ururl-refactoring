@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "react-responsive-modal";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ModalStore from "@src/store/common/modalStore";
 import InterviewBanner from "@src/component/modal/interviewModal/InterviewBanner";
 import InputInterviewInfo from "@src/component/modal/interviewModal/InputInterviewInfo";
@@ -25,8 +25,18 @@ const InterviewModal = (): JSX.Element => {
       }}
       showCloseIcon={false}
       styles={{
-        modalContainer: { display: "flex", justifyContent: "center", alignItems: "center" },
-        modal: { width: 494, height: 655, borderRadius: 13, outline: "none", padding: 0 },
+        modalContainer: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        },
+        modal: {
+          width: 494,
+          height: 655,
+          borderRadius: 13,
+          outline: "none",
+          padding: 0,
+        },
       }}
     >
       <InterviewBanner />

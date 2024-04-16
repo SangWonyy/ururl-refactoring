@@ -22,7 +22,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { UserInfoType } from "@src/type/user/userType";
 import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
 
@@ -33,7 +33,9 @@ const tagList = [
   { id: 4, name: "기타" },
 ];
 
-const Specialty = function Specialty(props: { checkValidation: boolean }): JSX.Element {
+const Specialty = function Specialty(props: {
+  checkValidation: boolean;
+}): JSX.Element {
   const { profileUserInfo, setProfileUserInfo } = ProfileUserInfoStore;
   const inputRef = useRef<HTMLInputElement>(null);
   const { checkValidation } = props;
@@ -45,9 +47,16 @@ const Specialty = function Specialty(props: { checkValidation: boolean }): JSX.E
 
   const clickTagCallback = useCallback(
     (isEtc: boolean, tagName: string, index: number) => {
-      setSpeciality(isEtc, inputRef, tagName, profileUserInfo, setSelectedIndex, index);
+      setSpeciality(
+        isEtc,
+        inputRef,
+        tagName,
+        profileUserInfo,
+        setSelectedIndex,
+        index
+      );
     },
-    [profileUserInfo],
+    [profileUserInfo]
   );
 
   useEffect(() => {
@@ -67,12 +76,18 @@ const Specialty = function Specialty(props: { checkValidation: boolean }): JSX.E
         <SubInfoWrapper>
           {checkValidation && profileUserInfo.major === "notMajorURURL" ? (
             <WarningWrapper>
-              <WarningIcon src={"./common/warningIcon.svg"} alt={"Image not found"} />
+              <WarningIcon
+                src={"./common/warningIcon.svg"}
+                alt={"Image not found"}
+              />
               <WarningText>지금 무슨 일을 하고 계신가요?</WarningText>
             </WarningWrapper>
           ) : (
             <ReadyTagWrapper>
-              <TagIcon src={"./common/personIcon.svg"} alt={"Image not found"} />
+              <TagIcon
+                src={"./common/personIcon.svg"}
+                alt={"Image not found"}
+              />
               지금 무슨 일을 하고 계신가요?
             </ReadyTagWrapper>
           )}
@@ -102,7 +117,10 @@ const Specialty = function Specialty(props: { checkValidation: boolean }): JSX.E
           ref={inputRef}
           disabled={true}
           onChange={(event) => {
-            setProfileUserInfo({ ...profileUserInfo, major: event.target.value });
+            setProfileUserInfo({
+              ...profileUserInfo,
+              major: event.target.value,
+            });
           }}
         />
       </SignUpTagWrapper>
@@ -116,7 +134,7 @@ const setSpeciality = (
   tagName: string,
   userInfo: UserInfoType,
   setSelectedIndex: Dispatch<SetStateAction<number>>,
-  index: number,
+  index: number
 ) => {
   const current = inputRef.current!;
   let majorName = "";
@@ -136,7 +154,11 @@ const getMajorTagIndex = (userInfo: UserInfoType): number => {
   const findTag = tagList.findIndex((tag) => tag.name === userInfo.major);
   const etcTagIndex = 3;
   const unSelected = 5;
-  return findTag > -1 ? findTag : userInfo.major === "notMajorURURL" ? unSelected : etcTagIndex;
+  return findTag > -1
+    ? findTag
+    : userInfo.major === "notMajorURURL"
+    ? unSelected
+    : etcTagIndex;
 };
 
 export default observer(Specialty);

@@ -9,7 +9,7 @@ import { CircularProgress } from "@material-ui/core";
 import useAddUrlMutation from "@src/queries/contentBox/useAddUrlMutation";
 import { UrlModalEnum } from "@src/enum/appEnum";
 import urlStore from "@src/store/url/urlStore";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import ModalStore from "@src/store/common/modalStore";
 import { useModifySubscriptionMutate } from "@src/queries/contentBox/useSubscriptionMutation";
 import TagListStore from "@src/store/common/TagListStore";
@@ -22,7 +22,10 @@ const UrlModalFooter = function SaveUrlFooter(props: {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { urlModalType, setIsOpen, urlId } = props;
   const { mutate: addUrlMutation } = useAddUrlMutation(setIsLoading, setIsOpen);
-  const { mutate: editUrlMutation } = useModifySubscriptionMutate(setIsLoading, setIsOpen);
+  const { mutate: editUrlMutation } = useModifySubscriptionMutate(
+    setIsLoading,
+    setIsOpen
+  );
 
   const isSaveUrl = urlModalType === UrlModalEnum.Save;
   const { title, url, isPublic } = urlStore;
@@ -42,7 +45,13 @@ const UrlModalFooter = function SaveUrlFooter(props: {
       }
 
       setIsLoading(true);
-      addUrlMutation({ url, isPublic, sourceMedium: "WEB", title, hashtags: selectedTagIdList });
+      addUrlMutation({
+        url,
+        isPublic,
+        sourceMedium: "WEB",
+        title,
+        hashtags: selectedTagIdList,
+      });
     } catch (e) {
       throw new Error(`saveUrl : ${e}`);
     }
@@ -77,7 +86,15 @@ const UrlModalFooter = function SaveUrlFooter(props: {
       }}
     >
       <BtnWrapper>
-        {isLoading ? <CircularProgress style={{ margin: "auto" }} size={20} color="inherit" /> : "저장하기"}
+        {isLoading ? (
+          <CircularProgress
+            style={{ margin: "auto" }}
+            size={20}
+            color="inherit"
+          />
+        ) : (
+          "저장하기"
+        )}
         <BookmarkIcon src={"./mainBody/bookmark.svg"} alt={"Image not found"} />
       </BtnWrapper>
     </SaveUrlButton>

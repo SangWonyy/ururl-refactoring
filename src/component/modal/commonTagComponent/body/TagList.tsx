@@ -8,7 +8,7 @@ import {
   TagLockIcon,
   TagNameText,
 } from "../../../common/customTag/customHashTag.style";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import TagDeleteModal from "../../tagDeleteModal/TagDeleteModal";
 import TagListStore from "@src/store/common/TagListStore";
 
@@ -19,13 +19,24 @@ const TagList = (props: {
     selectedIdList: number[],
     tagId: number,
     copyList: number[],
-    setIsMaxLength: Dispatch<SetStateAction<boolean>>,
+    setIsMaxLength: Dispatch<SetStateAction<boolean>>
   ) => void;
-  addTag: (copyList: number[], tagId: number, setIsMaxLength: Dispatch<SetStateAction<boolean>>) => void;
+  addTag: (
+    copyList: number[],
+    tagId: number,
+    setIsMaxLength: Dispatch<SetStateAction<boolean>>
+  ) => void;
   setIsMaxLength: Dispatch<SetStateAction<boolean>>;
   type: string;
 }) => {
-  const { customTagList, metaTagList, deleteDuplicate, addTag, type, setIsMaxLength } = props;
+  const {
+    customTagList,
+    metaTagList,
+    deleteDuplicate,
+    addTag,
+    type,
+    setIsMaxLength,
+  } = props;
   const { selectedTagIdList } = TagListStore;
   const [openTagDeleteModal, setOpenTagDeleteModal] = useState<boolean>(false);
   const [selectedTag, setSelectedTag] = useState<hashTagType>();
@@ -36,7 +47,7 @@ const TagList = (props: {
     (tagId: number) => {
       tagControll(tagId, deleteDuplicate, addTag, setIsMaxLength);
     },
-    [deleteDuplicate, addTag, setIsMaxLength],
+    [deleteDuplicate, addTag, setIsMaxLength]
   );
 
   return (
@@ -78,7 +89,10 @@ const TagList = (props: {
                     setOpenTagDeleteModal(true);
                   }}
                 >
-                  <DeleteIcon src={"./common/closeIcon.svg"} alt={"Image not found"} />
+                  <DeleteIcon
+                    src={"./common/closeIcon.svg"}
+                    alt={"Image not found"}
+                  />
                 </IconWrapper>
               </CustomTag>
             )}
@@ -105,10 +119,14 @@ const tagControll = (
     selectedIdList: number[],
     tagId: number,
     copyList: number[],
-    setIsMaxLength: Dispatch<SetStateAction<boolean>>,
+    setIsMaxLength: Dispatch<SetStateAction<boolean>>
   ) => void,
-  addTag: (copyList: number[], tagId: number, setIsMaxLength: Dispatch<SetStateAction<boolean>>) => void,
-  setIsMaxLength: Dispatch<SetStateAction<boolean>>,
+  addTag: (
+    copyList: number[],
+    tagId: number,
+    setIsMaxLength: Dispatch<SetStateAction<boolean>>
+  ) => void,
+  setIsMaxLength: Dispatch<SetStateAction<boolean>>
 ) => {
   try {
     const { selectedTagIdList } = TagListStore;

@@ -1,11 +1,16 @@
 import ContentBox from "../contentBox/ContentBox";
 import { useEffect, useMemo, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { ResultBoldText, ResultText, ResultWrapper, TextWrapper } from "./search.style";
+import {
+  ResultBoldText,
+  ResultText,
+  ResultWrapper,
+  TextWrapper,
+} from "./search.style";
 import useGetSearchResultsQuery from "@src/queries/contentBox/useGetSearchResultsQuery";
 import SearchStore from "@src/store/search/SearchStore";
 import SkeletonLoad from "@src/component/common/loadding/SkeletonLoad";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import NoResults from "@src/component/common/search/NoResults";
 import UrlStore from "@src/store/url/urlStore";
 import { ContestWrapper } from "@src/component/main/main.style";
@@ -25,7 +30,7 @@ const Results = function Results(): JSX.Element {
               return page.myUrl;
             })
             .flat().length
-        : 0,
+        : 0
     );
   }, [data]);
 
@@ -43,7 +48,9 @@ const Results = function Results(): JSX.Element {
         <>
           <TextWrapper>
             <ResultBoldText>&apos; {searchText} &apos;</ResultBoldText>
-            <ResultText>과 관련된 총 {totalNum}개의 url을 찾았습니다.</ResultText>
+            <ResultText>
+              과 관련된 총 {totalNum}개의 url을 찾았습니다.
+            </ResultText>
           </TextWrapper>
 
           <InfiniteScroll
