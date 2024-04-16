@@ -10,12 +10,11 @@ import "react-responsive-modal/styles.css";
 
 import PageFrame from "@src/component/common/pageFrame/PageFrame";
 import { Toaster } from "react-hot-toast";
+import { initMSW } from "@src/mocks";
+
+initMSW();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // if (typeof window !== "undefined") {
-  //   // test
-  //   window.open("https://ururl-official.notion.site/6-21-2e31b3af48a2401680885ca0bebbdc86", "_self");
-  // }
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -25,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             retry: 0,
           },
         },
-      }),
+      })
   );
 
   return (
