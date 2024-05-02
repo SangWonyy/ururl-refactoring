@@ -1,5 +1,5 @@
-import { ErrorType } from "../../../src/type/error/errorType";
-import { LoginState } from "../../../src/enum/appEnum";
+import { ErrorType } from "@src/type/error/errorType";
+import { LoginState } from "@src/enum/appEnum";
 
 const ClientError = (errorMessage: any): ErrorType => {
   try {

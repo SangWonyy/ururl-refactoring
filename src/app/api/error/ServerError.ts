@@ -1,4 +1,4 @@
-import { ErrorType } from "../../../src/type/error/errorType";
+import { ErrorType } from "@src/type/error/errorType";
 
 const ServerError = (response: any): ErrorType => {
   try {

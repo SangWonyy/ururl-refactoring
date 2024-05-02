@@ -1,4 +1,4 @@
-import Error404 from "../src/component/404/Error404";
+import Error404 from "../component/404/Error404";
 
 const Page404Page = (): JSX.Element => {
   return <Error404 />;

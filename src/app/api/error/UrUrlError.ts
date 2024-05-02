@@ -1,9 +1,9 @@
 import { ErrorType } from "@src/type/error/errorType";
 import ClientError from "./clientError";
 import ServerError from "./ServerError";
-import { removeTokenInHeader } from "@pages/api";
 import { removeJWTToken } from "@src/store/localStorage/localStorage";
 import UserInfoStore from "@src/store/user/UserInfoStore";
+import { removeTokenInHeader } from "@src/app/api";
 
 const UrUrlError = (error: any): ErrorType => {
   try {
@@ -14,7 +14,10 @@ const UrUrlError = (error: any): ErrorType => {
 };
 
 export const ThrowUrUrlError = (error: any) => {
-  if (error.response.data.error.status === 401 && error.response.data.error.message.includes("JWT")) {
+  if (
+    error.response.data.error.status === 401 &&
+    error.response.data.error.message.includes("JWT")
+  ) {
     removeTokenInHeader();
     removeJWTToken();
     UserInfoStore.setInitUser();
