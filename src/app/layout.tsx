@@ -2,6 +2,8 @@ import "./global.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ReactQueryProvider from "@src/component/common/ReactQueryProvider";
+import MSWInit from "@src/component/common/MSWInit";
+import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,12 +16,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <MSWInit>{children}</MSWInit>
+        </ReactQueryProvider>
       </body>
     </html>
   );

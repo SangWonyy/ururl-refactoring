@@ -6,7 +6,7 @@ const getAllUrl = async (
   selectedTagId: number
 ): Promise<TAllUrlTabData> => {
   const { data } = await instance.get(
-    `/api/urlpost/all-urls?page=${page}&hashtagId=${selectedTagId}`
+    `/api/urlpost/all-urls?page=${page}&selectedTagId=${selectedTagId}`
   );
   return data.response;
 };
