@@ -1,8 +1,3 @@
-import { http, HttpResponse } from "msw";
+import { urlHandler } from "@src/mocks/url";
 
-export const handlers = [
-  // 할일 목록
-  http.get("/todos", () => {
-    return HttpResponse.json([]);
-  }),
-];
+export const handlers = [...urlHandler];
