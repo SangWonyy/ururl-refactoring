@@ -23,15 +23,19 @@ babel preset을 통해서 빌드했을 때는 약 27초 정도가 걸리는 것�
 <img width="172" alt="스크린샷 2024-03-22 오후 5 20 19" src="https://github.com/SangWonyy/ururl-refactoring/assets/47518178/7adb66ab-930d-41e8-86dd-288572810c72">
 
 
+4. Mockoon 또는 MSW로 적용하기
+   
+처음에 Mockoon이 어플리케이션으로써 제공하여 GUI로 편안하게 작업이 가능하여 Mockoon을 도입하려 하였으나,
+MSW가 더 좋다는 생각에 전환.
+Mockoon은 GUI를 통해 작업을 할 수 있기 때문에 편하지만, 개인적으로는 MSW가 더 편하다고 생각했다.
+그 이유는 Mockoon이라는 어플리케이션의 정해진 패턴에 따라 작업을 해야하기 때문에 이에 대해 적응을 해야했다. 반면 MSW는 코드로써 작성하고 기존 요청 응답에 있어 개발자 경험이 더 좋다고 생각했다. 뿐만 아니라 응답에 대한 타입을 정의를 할 수 있어 더 편리함에 MSW를 선택
 
-4. Mockoon 적용
-서버를 따로 두지는 않을거기 때문에 MOCK API를 통해 작업할 예정이다.
 
-5. 전체적인 코드 릭펙도링
+6. 전체적인 코드 릭펙도링
 
-6. Test Code
+7. Test Code
 
-7. Styled-component to vanilla extract
+8. Styled-component to vanilla extract
 styled-component를 제거할 예정이다.
 
 이유 : 개인적인 생각이지만 styled-component는 Next와는 잘 어울리지 않는다고 생각한다.
