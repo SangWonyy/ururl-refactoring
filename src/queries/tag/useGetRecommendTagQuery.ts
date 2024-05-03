@@ -1,9 +1,11 @@
-import { useQuery } from "react-query";
 import { hashTagType } from "@src/type/tag/tagType";
-import { requestRecommandTag } from "@pages/api/tag/recommandTag";
+import { useQuery } from "@tanstack/react-query";
+import { requestRecommandTag } from "@src/app/api/tag/recommandTag";
 
 const useGetRecommendTagQuery = (keyword: string) => {
-  return useQuery<hashTagType[], Error>(["recommendTag", keyword], () => requestRecommandTag(keyword), {
+  return useQuery<hashTagType[], Error>({
+    queryKey: ["recommendTag", keyword],
+    queryFn: () => requestRecommandTag(keyword),
     enabled: Boolean(keyword),
   });
 };

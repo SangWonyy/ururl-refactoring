@@ -1,18 +1,17 @@
-import { useQuery } from "react-query";
 import { TagResponseType } from "@src/type/mainBody/mainBodyType";
-import { getTags } from "@pages/api/tag/getTags";
 import { StaleTimeEnum } from "@src/enum/appEnum";
 import TagListStore from "@src/store/common/TagListStore";
+import { useQuery } from "@tanstack/react-query";
+import { getTags } from "@src/app/api/tag/getTags";
 
 const useGetTagListQuery = () => {
-  return useQuery<TagResponseType, Error | void>("getTag", getTags, {
+  const { data } = useQuery<TagResponseType, Error | void>({
+    queryKey: ["getTag"],
+    queryFn: getTags,
     staleTime: StaleTimeEnum.Default,
     refetchOnWindowFocus: false,
-    onSuccess: (data) => {
-      const { hashtags } = data;
-      TagListStore.setTagList(hashtags);
-    },
   });
+  TagListStore.setTagList(data ? data.hashtags : []);
 };
 
 export default useGetTagListQuery;

@@ -1,27 +1,17 @@
 import { hashTagType } from "@src/type/tag/tagType";
-import { useMutation, useQueryClient } from "react-query";
 import { AddCustomTagType } from "@src/type/mainBody/mainBodyType";
-import { addCustomTag, tagParam } from "@pages/api/tag/addCustomTag";
-import TagListStore from "@src/store/common/TagListStore";
+import { addCustomTag, tagParam } from "@src/app/api/tag/addCustomTag";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useAddCustomTagMutation = (tagList: hashTagType[]) => {
   const queryClient = useQueryClient();
-  return useMutation<AddCustomTagType, Error, tagParam>(
-    "addTag",
-    (tag) => {
+  return useMutation<AddCustomTagType, Error, tagParam>({
+    mutationKey: ["addTag"],
+    mutationFn: (tag) => {
       return addCustomTag(tag);
     },
-    {
-      onError: (error) => {
-        console.error(error);
-      },
-
-      onSuccess: (newTag) => {
-        // TagListStore.setTagList([...tagList, newTag]);
-        queryClient.invalidateQueries("getTag");
-      },
-    },
-  );
+    onSuccess: () => {},
+  });
 };
 
 export default useAddCustomTagMutation;

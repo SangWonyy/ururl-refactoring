@@ -1,20 +1,12 @@
-import { useMutation, useQueryClient } from "react-query";
-import { deleteCustomTag } from "@pages/api/tag/deleteCustomTag";
+import { deleteCustomTag } from "@src/app/api/tag/deleteCustomTag";
+import { useMutation } from "@tanstack/react-query";
 
 const useDeleteTagMutation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation<boolean, Error, number>(
-    "deleteTag",
-    (tagId) => {
-      return deleteCustomTag(tagId);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getTag");
-      },
-    },
-  );
+  return useMutation<boolean, Error, number>({
+    mutationKey: ["deleteTag"],
+    mutationFn: (tagId) => deleteCustomTag(tagId),
+    onSuccess: () => {},
+  });
 };
 
 export default useDeleteTagMutation;
