@@ -1,5 +1,6 @@
 import {
   MyContentType,
+  ResponseUrlType,
   TAllUrlTabData,
   urlTag,
 } from "@src/type/mainBody/mainBodyType";
@@ -70,7 +71,7 @@ export const allUrlResponse: TAllUrlTabData = {
   },
 };
 
-export const myContentResponse: MyContentType = {
+const content: MyContentType = {
   id: 1,
   createOn: "2024-03-02",
   estimatedTime: 20,
@@ -83,4 +84,17 @@ export const myContentResponse: MyContentType = {
   tags: [{ id: 1, name: "tag" }],
   siteName: "notion",
   title: "url title",
+};
+
+export const myContentResponse: MyContentType = content;
+
+export const myUrlResponse: ResponseUrlType = {
+  myUrl: [content],
+  pageInfo: {
+    hasNext: false,
+    hasPrev: false,
+    totalNum: 10,
+    totalPages: 1,
+    currentPage: 1,
+  },
 };

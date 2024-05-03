@@ -1,5 +1,9 @@
 import { http, HttpResponse } from "msw";
-import { allUrlResponse, myContentResponse } from "@src/mocks/url/response";
+import {
+  allUrlResponse,
+  myContentResponse,
+  myUrlResponse,
+} from "@src/mocks/url/response";
 
 export const urlHandler = [
   /**
@@ -19,13 +23,17 @@ export const urlHandler = [
     return HttpResponse.json(3);
   }),
 
+  http.get("/api/urlpost/urls", () => {
+    return HttpResponse.json(myUrlResponse);
+  }),
+
   /**
    * POST
    */
   http.post<{ page: string }>("/api/urlpost/page/:page/report", (request) => {
     const { page } = request.params;
     if (!page) {
-      return new HttpResponse(null, { status: 404 });
+      return new HttpResponse(null, { status: 400 });
     }
     return HttpResponse.json(null);
   }),
@@ -40,6 +48,14 @@ export const urlHandler = [
       return HttpResponse.json(urlId);
     }
   ),
+
+  http.post("/api/urlpost/read", (request) => {
+    return HttpResponse.json({ variance: 1 });
+  }),
+
+  http.post("api/urlpost/url", (request) => {
+    return HttpResponse.json(myContentResponse);
+  }),
 
   /**
    * DELETE

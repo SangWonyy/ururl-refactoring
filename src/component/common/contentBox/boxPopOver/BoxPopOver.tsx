@@ -28,7 +28,7 @@ const BoxPopOver = (props: {
 }): JSX.Element => {
   const { setRead, read, urlId, url, boxIndex, setSelectedIndex } = props;
   const { challengeData } = ChallengeStore;
-  const { mutate: readMutation, isLoading } = useReadUrlMutation();
+  const { mutate: readMutation } = useReadUrlMutation();
 
   const copyCallback = useCallback(() => {
     setSelectedIndex(-1);
@@ -37,8 +37,6 @@ const BoxPopOver = (props: {
   }, [url]);
 
   const readCallback = useCallback(() => {
-    if (isLoading) return;
-
     const weekReadCount = !read
       ? challengeData.weekReadCount + 1
       : challengeData.weekReadCount - 1 > 0
