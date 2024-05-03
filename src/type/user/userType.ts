@@ -15,7 +15,6 @@ export type UserInfoType = {
   defaultPhotoIdx: number;
   major: string;
   hashtags: hashTagType[];
-  attributes: { isVisibleInterviewPopup: boolean };
   kakaoToken?: string | null;
 };
 

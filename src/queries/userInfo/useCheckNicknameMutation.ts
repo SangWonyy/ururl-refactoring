@@ -1,20 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
 import { TNickNameState } from "@src/type/login/loginType";
-import { useMutation } from "react-query";
-import { requestCheckingNickname } from "@pages/api/common/useInfo";
+import { useMutation } from "@tanstack/react-query";
+import { requestCheckingNickname } from "@src/app/api/common/useInfo";
 
-const useCheckNicknameMutation = (setNickNameValidation: Dispatch<SetStateAction<TNickNameState>>) => {
-  return useMutation<boolean, Error, string>(
-    "checkNickname",
-    (nickname) => {
-      return requestCheckingNickname(nickname);
+const useCheckNicknameMutation = (
+  setNickNameValidation: Dispatch<SetStateAction<TNickNameState>>
+) => {
+  return useMutation<boolean, Error, string>({
+    mutationKey: ["checkNickname"],
+    mutationFn: (nickname) => requestCheckingNickname(nickname),
+    onSuccess: (isDuple) => {
+      setNickNameValidation(isDuple ? "duple" : "check");
     },
-    {
-      onSuccess: (isDuple) => {
-        setNickNameValidation(isDuple ? "duple" : "check");
-      },
-    },
-  );
+  });
 };
 
 export default useCheckNicknameMutation;

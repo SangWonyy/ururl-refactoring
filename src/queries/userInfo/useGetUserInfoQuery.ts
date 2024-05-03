@@ -1,47 +1,38 @@
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
-import { requestUserInfo } from "@pages/api/common/useInfo";
 import { StaleTimeEnum } from "@src/enum/appEnum";
-import { getInterViewTime, getJWTToken, removeJWTToken } from "@src/store/localStorage/localStorage";
+import {
+  getJWTToken,
+  removeJWTToken,
+} from "@src/store/localStorage/localStorage";
 import UserInfoStore from "@src/store/user/UserInfoStore";
-import { removeTokenInHeader } from "@pages/api";
 import { UserInfoType } from "@src/type/user/userType";
 import ProfileUserInfoStore from "@src/store/user/ProfileInfoStore";
-import ModalStore from "@src/store/common/modalStore";
+import { useQuery } from "@tanstack/react-query";
+import { requestUserInfo } from "@src/app/api/common/useInfo";
+import { removeTokenInHeader } from "@src/app/api";
 
 const useGetUserInfoQuery = (isMobile: boolean) => {
   const router = useRouter();
   const { setUserInfo, userInfo } = UserInfoStore;
   const { setProfileUserInfo } = ProfileUserInfoStore;
-  const { setOpenInterviewModal } = ModalStore;
 
-  return useQuery<UserInfoType, Error, UserInfoType>("userInfo", requestUserInfo, {
+  const { data } = useQuery<UserInfoType, Error, UserInfoType>({
+    queryKey: ["userInfo"],
+    queryFn: requestUserInfo,
     staleTime: StaleTimeEnum.Default,
-    cacheTime: StaleTimeEnum.Default,
+    gcTime: StaleTimeEnum.Default,
     enabled: !!getJWTToken() && userInfo.nickName === "",
     retry: false,
     refetchOnWindowFocus: false,
-    onSuccess: async (data) => {
-      if (isMobile) {
-        resetInfo();
-        router.push("/");
-      }
-
-      const { attributes, nickName } = data;
-      const { isVisibleInterviewPopup } = attributes;
-      const interviewTimeString = getInterViewTime();
-      if (interviewTimeString) {
-        const interviewTime = new Date(interviewTimeString);
-        const now = new Date();
-        const isSame = isSameDate(interviewTime, now);
-        if (isSame) return;
-      }
-      isVisibleInterviewPopup && setOpenInterviewModal(true, nickName);
-
-      setUserInfo(data);
-      setProfileUserInfo(data);
-    },
   });
+  if (isMobile) {
+    resetInfo();
+    router.push("/");
+  }
+  if (data) {
+    setUserInfo(data);
+    setProfileUserInfo(data);
+  }
 };
 
 const resetInfo = () => {

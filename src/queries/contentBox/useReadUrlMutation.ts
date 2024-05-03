@@ -1,11 +1,11 @@
-import { useMutation } from "react-query";
 import { ReadUrlType } from "@src/type/mainBody/mainBodyType";
-import { requestReadUrl } from "@pages/api/myUrl/readUrl";
-import ChallengeStore from "@src/store/main/body/ChallengeStore";
+import { useMutation } from "@tanstack/react-query";
+import { requestReadUrl } from "@src/app/api/myUrl/readUrl";
 
 const useReadUrlMutation = () => {
-  return useMutation<{ variance: number }, Error, ReadUrlType>("readUrl", (urlData) => {
-    return requestReadUrl(urlData);
+  return useMutation<{ variance: number }, Error, ReadUrlType>({
+    mutationKey: ["readUrl"],
+    mutationFn: (urlData) => requestReadUrl(urlData),
   });
 };
 
