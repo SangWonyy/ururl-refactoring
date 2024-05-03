@@ -1,7 +1,9 @@
 import { instance } from "../index";
 import { hashTagType } from "@src/type/tag/tagType";
 
-const requestRecommandTag = async (keyword?: string): Promise<hashTagType[]> => {
+const requestRecommandTag = async (
+  keyword?: string
+): Promise<hashTagType[]> => {
   try {
     const config = {
       params: {
@@ -9,7 +11,7 @@ const requestRecommandTag = async (keyword?: string): Promise<hashTagType[]> => 
       },
     };
 
-    const { data } = await instance.get("/api/user/hashtags", config);
+    const { data } = await instance.get("/api/hashtags", config);
     return data.response.hashtags;
   } catch (error) {
     throw new Error(`requestRecommandTag: ${error}`);

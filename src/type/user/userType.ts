@@ -1,10 +1,10 @@
 import { hashTagType } from "@src/type/tag/tagType";
 
 export type TCarreerLevel =
-  | "CareerLevel.JUNIOR"
-  | "CareerLevel.INTERMEDIATE"
-  | "CareerLevel.SENIOR"
-  | "CareerLevel.SUPER_SENIOR"
+  | "JUNIOR"
+  | "INTERMEDIATE"
+  | "SENIOR"
+  | "SUPER_SENIOR"
   | null;
 
 export type UserInfoType = {

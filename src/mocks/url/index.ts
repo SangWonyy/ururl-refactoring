@@ -27,6 +27,10 @@ export const urlHandler = [
     return HttpResponse.json(myUrlResponse);
   }),
 
+  http.get("/api/urlpost/url/title", () => {
+    return HttpResponse.json();
+  }),
+
   /**
    * POST
    */
@@ -70,6 +74,10 @@ export const urlHandler = [
       return HttpResponse.json(urlId);
     }
   ),
+
+  http.delete("/api/user/withdrawal", () => {
+    return HttpResponse.json(true);
+  }),
 
   /**
    * PUT

@@ -6,7 +6,7 @@ export type tagParam = {
 };
 
 const addCustomTag = async (tag: tagParam): Promise<AddCustomTagType> => {
-  const { data } = await instance.post("/api/user/hashtag", tag);
+  const { data } = await instance.post("/api/hashtags", tag);
   return data.response;
 };
 
