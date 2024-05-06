@@ -1,3 +1,4 @@
+import "src/style/reset.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ReactQueryProvider from "@src/component/common/ReactQueryProvider";
