@@ -113,7 +113,7 @@ textarea:focus:-ms-input-placeholder {
 /*}*/
 
 @font-face {
-  font-family: "PretendardM";
+  font-family: "Pretendard-Medium";
   src:url("../public/fonts/Pretendard-Medium.woff2") format("woff");
   font-style: normal;
   font-display: swap;
