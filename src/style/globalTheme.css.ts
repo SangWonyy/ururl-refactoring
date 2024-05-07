@@ -44,7 +44,3 @@ export const global = createGlobalTheme(":root", {
 globalStyle("*", {
   boxSizing: "border-box",
 });
-
-globalStyle("body", {
-  fontSize: global.fontSize.b2,
-});
