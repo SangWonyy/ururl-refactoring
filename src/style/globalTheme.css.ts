@@ -15,7 +15,7 @@ export const global = createGlobalTheme(":root", {
     b5: "12px",
   },
   color: {
-    main: "#F9B900",
+    primary: "#F9B900",
     secondary: "#FFCC37",
     warning: "#F11D1D",
     success: "#4CC297",

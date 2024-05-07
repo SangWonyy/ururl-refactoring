@@ -1,5 +1,13 @@
+import { button } from "@src/component/button/button.css";
+
 const Home = () => {
-  return <div>dddddd</div>;
+  return (
+    <div>
+      <button className={button({ color: "primary", size: "large" })}>
+        test
+      </button>
+    </div>
+  );
 };
 
 export default Home;
