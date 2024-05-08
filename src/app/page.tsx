@@ -1,10 +1,9 @@
-import URURLInput from "@src/component/input/URURLInput";
-import { ChangeEvent } from "react";
+import URURLDropdownInput from "@src/component/input/URURLDropdownInput";
 
 const Home = () => {
   return (
     <div>
-      <URURLInput placeHolder="입력하세요요" />
+      <URURLDropdownInput />
     </div>
   );
 };
