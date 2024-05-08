@@ -95,5 +95,3 @@ export const buttonSprinkles = createSprinkles(
   responsiveProperties,
   buttonProperties
 );
-
-export type Sprinkles = Parameters<typeof buttonSprinkles>[0];

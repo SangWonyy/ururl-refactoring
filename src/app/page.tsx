@@ -1,11 +1,10 @@
-import { button } from "@src/component/button/button.css";
+import URURLInput from "@src/component/input/URURLInput";
+import { ChangeEvent } from "react";
 
 const Home = () => {
   return (
     <div>
-      <button className={button({ color: "primary", size: "large" })}>
-        test
-      </button>
+      <URURLInput placeHolder="입력하세요요" />
     </div>
   );
 };
