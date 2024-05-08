@@ -27,6 +27,7 @@ export const global = createGlobalTheme(":root", {
     gray150: "#F5F5F5",
     gray200: "#F5F5F5",
     gray250: "#E8E8E8",
+    gray280: "#EBEBEB",
     gray300: "#DFDFDF",
     gray350: "#C8C8C8",
     gray370: "#CECECE",

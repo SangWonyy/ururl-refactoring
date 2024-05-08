@@ -1,4 +1,4 @@
-import { keyframes, style } from "@vanilla-extract/css";
+import { globalStyle, keyframes, style } from "@vanilla-extract/css";
 import { global } from "@src/style/globalTheme.css";
 import { recipe } from "@vanilla-extract/recipes";
 
@@ -29,11 +29,9 @@ export const inputMessage = recipe({
   },
 });
 
-const dropdownKeyframe = keyframes({
-  from: { height: 58 },
-  to: { height: 180 },
-});
 export const dropdownInput = style({
+  display: "flex",
+  alignItems: "center",
   position: "relative",
   marginTop: 30,
   width: 610,
@@ -50,7 +48,12 @@ export const dropdownInput = style({
   },
 });
 
+globalStyle(`${dropdownInput} > div`, {
+  paddingLeft: 10,
+});
+
 export const dropList = style({
+  overflow: "auto",
   position: "absolute",
   padding: 10,
   top: 53,
@@ -70,7 +73,7 @@ export const dropList = style({
       visibility: "visible",
       height: 300,
       opacity: 1,
-      transition: "0.5s height",
+      transition: "0.5s height, 0.5s opacity",
       borderBottom: `1px solid ${global.color.primary}`,
       borderRight: `1px solid ${global.color.primary}`,
       borderLeft: `1px solid ${global.color.primary}`,
@@ -82,4 +85,16 @@ export const dropList = style({
       transition: "0.5s height, 0.3s visibility, 1.0s opacity",
     },
   },
+});
+
+globalStyle(`${dropList} > li`, {
+  cursor: "pointer",
+  color: global.color.gray380,
+  paddingTop: 8,
+  paddingBottom: 8,
+  borderBottom: `1px solid ${global.color.gray280}`,
+});
+
+globalStyle(`${dropList} > li:hover`, {
+  color: global.color.gray730,
 });

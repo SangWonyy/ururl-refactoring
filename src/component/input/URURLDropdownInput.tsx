@@ -2,11 +2,24 @@
 
 import { dropdownInput, dropList } from "@src/component/input/input.css";
 
-const URURLDropdownInput = () => {
+type TDropItem = {
+  id: number;
+  value: string;
+};
+
+type TDropdown = {
+  onClick?: () => void;
+  itemList: TDropItem[];
+};
+
+const URURLDropdownInput = ({ onClick, itemList }: TDropdown) => {
   return (
     <div className={dropdownInput}>
+      <div>test</div>
       <ul className={dropList}>
-        <li>test</li>
+        {itemList.map((item) => (
+          <li key={item.id}>{item.value}</li>
+        ))}
       </ul>
     </div>
   );
