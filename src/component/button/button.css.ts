@@ -1,10 +1,10 @@
 import { recipe } from "@vanilla-extract/recipes";
-import { sprinkles } from "@src/style/sprinkles.css";
+import { buttonSprinkles } from "@src/component/button/buttonSprinkles.css";
 
 export const button = recipe({
   base: [
     { borderRadius: "10px", height: "48px" },
-    sprinkles({
+    buttonSprinkles({
       display: "flex",
       placeItems: "center",
     }),
@@ -12,18 +12,31 @@ export const button = recipe({
   variants: {
     color: {
       primary: [
-        sprinkles({
+        buttonSprinkles({
           backgroundColor: "primary",
+          disabled: "primary",
+          hover: "primary",
+          click: "primary",
           color: "white",
           border: "none",
         }),
       ],
       secondary: [
-        sprinkles({ backgroundColor: "black", color: "white", border: "none" }),
+        buttonSprinkles({
+          backgroundColor: "black",
+          disabled: "secondary",
+          hover: "secondary",
+          click: "secondary",
+          color: "white",
+          border: "none",
+        }),
       ],
       tertiary: [
-        sprinkles({
+        buttonSprinkles({
           backgroundColor: "white",
+          disabled: "tertiary",
+          hover: "tertiary",
+          click: "tertiary",
           color: "primary",
           border: "primary",
         }),

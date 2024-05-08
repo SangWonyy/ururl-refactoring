@@ -1,5 +1,4 @@
-import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
-import { global } from "@src/style/globalTheme.css";
+import { defineProperties } from "@vanilla-extract/sprinkles";
 
 const space = {
   none: 0,
@@ -8,12 +7,7 @@ const space = {
   large: "16px",
 };
 
-const buttonBorder = {
-  none: 0,
-  primary: `1px solid ${global.color.primary}`,
-};
-
-const responsiveProperties = defineProperties({
+export const responsiveProperties = defineProperties({
   conditions: {
     mobile: {},
     tablet: { "@media": "screen and (min-width: 768px)" },
@@ -44,18 +38,3 @@ const responsiveProperties = defineProperties({
     placeItems: ["justifyContent", "alignItems"],
   },
 });
-
-const buttonColorProperties = defineProperties({
-  properties: {
-    color: global.color,
-    backgroundColor: global.color,
-    border: buttonBorder,
-  },
-});
-
-export const sprinkles = createSprinkles(
-  responsiveProperties,
-  buttonColorProperties
-);
-
-export type Sprinkles = Parameters<typeof sprinkles>[0];
