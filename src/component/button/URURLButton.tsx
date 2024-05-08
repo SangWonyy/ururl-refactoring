@@ -5,11 +5,22 @@ type TButton = {
   size: "large" | "small";
   color: "primary" | "secondary" | "tertiary";
   text: string;
+  disable?: boolean;
 };
 
-const URURLButton = ({ onClick, size, color, text }: TButton) => {
+const URURLButton = ({
+  onClick,
+  size,
+  color,
+  text,
+  disable = false,
+}: TButton) => {
   return (
-    <button className={button({ color, size })} onClick={onClick}>
+    <button
+      className={button({ color, size })}
+      onClick={onClick}
+      disabled={disable}
+    >
       {text}
     </button>
   );
